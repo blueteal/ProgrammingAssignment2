@@ -47,8 +47,15 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
 ## Return a matrix that is the inverse of 'x'
 
-    # Get Matrix Inverse (MI)
-    mi <- x$getmatrixinverse()
+    # Test if 'x' is a Cached Matrix Object else return message
+    # If 'x' is a Cached Matrix Object assign MI the current value
+    if(typeof(x) == "list" && typeof(x$getmatrixinverse) == "closure") {
+        mi <- x$getmatrixinverse()
+    } else {
+        message("Not a Cached Matrix Object")
+        return(0)
+    }
+
 
     # If MI is not NULL, return MI
     if(!is.null(mi)) {
